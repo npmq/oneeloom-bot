@@ -1,5 +1,5 @@
 import express from 'express'
-import { SERVER_PORT } from './config'
+import { PORT } from './config'
 import githubRouter from './routes/githubWebhook'
 
 const app = express()
@@ -12,6 +12,6 @@ app.get('/', (req, res) => {
   res.send('🟢 Bot is up and running')
 })
 
-app.listen(SERVER_PORT, () => {
-  console.log(`🔌 Server Started at PORT:${SERVER_PORT}`)
+app.listen(PORT, () => {
+  console.log(`🔌 Server Started at PORT:${PORT}`)
 })

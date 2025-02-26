@@ -9,5 +9,5 @@ export const BOT_CONFIG = {
   BOT_CHAT_ID
 }
 
-export const SERVER_PORT: string = process.env.SERVER_PORT ?? '8000'
+export const PORT: string = process.env.SERVER_PORT ?? '8000'
 

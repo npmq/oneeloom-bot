@@ -6,6 +6,6 @@ services:
       - "8000:8000"
     environment:
       NODE_ENV: "production"
-      SERVER_PORT: "8000"
+      PORT: "${PORT}"
       BOT_API_TOKEN: "${BOT_API_TOKEN}"
       BOT_CHAT_ID: "${BOT_CHAT_ID}"
