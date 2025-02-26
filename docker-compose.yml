@@ -1,0 +1,11 @@
+services:
+  chatbot:
+    build: .
+    container_name: oneeloom_bot
+    ports:
+      - "8000:8000"
+    environment:
+      NODE_ENV: "production"
+      SERVER_PORT: "8000"
+      BOT_API_TOKEN: "${BOT_API_TOKEN}"
+      BOT_CHAT_ID: "${BOT_CHAT_ID}"
