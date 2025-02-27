@@ -20,7 +20,11 @@ export const sendTelegramMessage = async (message: string): Promise<void> => {
   }
 
   try {
-    await bot.api.sendMessage(BOT_CHAT_ID, message)
+    await bot.api.sendMessage(
+      BOT_CHAT_ID,
+      message,
+      { parse_mode: 'Markdown' }
+    )
     console.log('✅ Message sent to Telegram')
   } catch {
     console.error('❌ Error! Message not sent to Telegram')
