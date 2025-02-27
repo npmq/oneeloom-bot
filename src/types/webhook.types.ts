@@ -11,6 +11,10 @@ export interface GithubWorkflowRun {
 }
 
 export interface GithubWebhookPayload {
-  workflow_run?: GithubWorkflowRun
-  repository?: GithubRepository
+  status: 'success' | 'failure',
+  repository: string
+  workflow: string
+  commit_url: string
+  message: string
+  failed_step?: string
 }

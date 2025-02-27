@@ -9,9 +9,9 @@ app.use(express.json())
 app.use('/webhook', githubRouter)
 
 app.get('/', (req, res) => {
-  res.send('🟢 Bot is up and running')
+  res.send('🚀 Bot is up and running')
 })
 
 app.listen(PORT, () => {
-  console.log(`🔌 Server Started at PORT:${PORT}`)
+  console.log(`🟢 Server Started at PORT:${PORT}`)
 })
