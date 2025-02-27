@@ -10,7 +10,7 @@ router.post('/github', async (req: Request, res: Response): Promise<void> => {
     const payload: GithubWebhookPayload = req.body;
     console.log('Received Github Webhook:', payload);
 
-    const { status, repository, workflow, commit_url, failed_step, message, branch, environment } = payload;
+    const { status, repository, workflow, commit_url, failed_step, message, branch } = payload;
 
     // Проверка обязательных полей
     if (!repository || !workflow || !commit_url) {
@@ -24,7 +24,6 @@ router.post('/github', async (req: Request, res: Response): Promise<void> => {
     const defaultMessage = {
       '📁 *Repository*': `\`${repository}\``,
       '🌿 *Branch*': `\`${branch || 'unknown'}\``,
-      '🌍 *Environment*': `\`${environment || 'unknown'}\``,
       '⚙️ *Workflow*': `\`${workflow}\``,
       '🔗 *Commit*': `[View commit](${commit_url})`,
       ...(failed_step && { '❌ *Failed Step*': `\`${failed_step}\`` }),
