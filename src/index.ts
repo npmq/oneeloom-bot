@@ -13,5 +13,9 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`🟢 Server Started at PORT:${PORT}`)
+  console.log('╔══════════════════════════════════════════════╗');
+  console.log('║                                              ║')
+  console.log(`║  🟢 Server Started at http://localhost:${PORT}  ║`);
+  console.log('║                                              ║')
+  console.log('╚══════════════════════════════════════════════╝');
 })

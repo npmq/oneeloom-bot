@@ -26,8 +26,8 @@ export const sendTelegramMessage = async (message: string): Promise<void> => {
       { parse_mode: 'Markdown' }
     )
     console.log('✅ Message sent to Telegram')
-  } catch {
-    console.error('❌ Error! Message not sent to Telegram')
+  } catch (error) {
+    console.error('❌ Error! Message not sent to Telegram', error)
   }
 }
 
