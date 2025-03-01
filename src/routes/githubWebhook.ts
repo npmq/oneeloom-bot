@@ -7,6 +7,8 @@ const router = Router();
 router.post('/github', async (req: Request, res: Response): Promise<void> => {
   try {
     const payload: GithubWebhookPayload = req.body;
+    console.log('Payload', payload)
+    
     const {
       status,
       repository,
