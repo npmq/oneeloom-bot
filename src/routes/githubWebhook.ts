@@ -33,9 +33,9 @@ router.post('/github', async (req: Request, res: Response): Promise<void> => {
       `*Repository*: _${repository}_`,
       `*Branch*: _${branch || 'unknown'}_`,
       `*Workflow*: _${workflow}_`,
-      `*Event Time*: ${timestamp || 'unknown'}`,
+      `*Event Time*: _${timestamp || 'unknown'}_`,
       `*Commit*: [View commit](${commit_url})`,
-      ...(failed_step ? [`*Failed Step*: ${failed_step}`] : []),
+      ...(failed_step ? [`*Failed Step*: _${failed_step}_`] : []),
       `*Message*: _${message || 'unknown'}_\n`,
     ]
 
