@@ -1,13 +1,15 @@
-import dotenv from 'dotenv'
+import { config } from 'dotenv'
+import { EnvConfig } from '../types/config.types'
+import { envSchema } from './schema'
 
-dotenv.config()
+config()
 
-export const BOT_API_TOKEN: string = process.env.BOT_API_TOKEN ?? ''
-export const BOT_CHAT_ID: string = process.env.BOT_CHAT_ID ?? ''
-export const BOT_CONFIG = {
-  BOT_API_TOKEN,
-  BOT_CHAT_ID
+const env = envSchema.safeParse(process.env)
+
+if (!env.success) {
+  console.error('❌ Error validating environment variables:', env.error.format())
+
+  process.exit(1)
 }
 
-export const PORT: string = process.env.SERVER_PORT ?? '8000'
-
+export const envConfig: EnvConfig = env.data
