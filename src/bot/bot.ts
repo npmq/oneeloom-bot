@@ -1,42 +1,51 @@
 import { Bot } from 'grammy'
-import { BOT_CONFIG } from '../config'
+import { envConfig } from '../config'
+import { handleTelegramError } from '../utils/errorHandler'
+import { sendTelegramMessage } from '../utils/sendMessage'
+import { setupCommands } from './commands'
 
-const { BOT_API_TOKEN, BOT_CHAT_ID } = BOT_CONFIG
+/**
+ * Экземпляр бота, инициализированный с использованием токена из конфигурации.
+ */
+export const bot = new Bot(envConfig.BOT_API_TOKEN)
 
-if (!BOT_API_TOKEN || !BOT_CHAT_ID) {
-  console.error(
-    '❌ Error! BOT_API_TOKEN and BOT_CHAT_ID most be required in .env'
-  )
+/**
+ * Инициализация и регистрация команд бота.
+ * Команды настраиваются в модуле `commands`.
+ */
+setupCommands(bot)
 
-  process.exit(1)
-}
+/**
+ * Отправка тестового сообщения при запуске бота.
+ * Это подтверждает, что бот успешно запущен и может отправлять сообщения.
+ */
+sendTelegramMessage(
+  bot,
+  envConfig.BOT_CHAT_ID,
+  'Bot is running! Sending & receiving messages works 📨.'
+)
 
-export const bot = new Bot(BOT_API_TOKEN)
+/**
+ * Глобальный обработчик ошибок бота.
+ * Ловит все ошибки, возникающие в процессе работы бота,
+ * и передаёт их в функцию `handleTelegramError` для логирования и обработки.
+ */
+bot.catch((error) => {
+  handleTelegramError(error, 'Bot error')
+})
 
-export const sendTelegramMessage = async (message: string): Promise<void> => {
-  if (!message) {
-    console.error('❌ Error! No message provided')
-    return
-  }
-
+/**
+ * Функция для запуска бота с обработкой ошибок.
+ */
+const startBot = async () => {
   try {
-    await bot.api.sendMessage(
-      BOT_CHAT_ID,
-      message,
-      { parse_mode: 'Markdown' }
-    )
-    console.log('✅ Message sent to Telegram')
+    await bot.start()
+    console.log('🤖 Bot started.')
   } catch (error) {
-    console.error('❌ Error! Message not sent to Telegram', error)
-  }
+    handleTelegramError(error, 'Error starting bot')
+    process.exit(1)
+ }
 }
 
-// bot.command('start', (ctx) => {
-//   ctx.reply('hello 👋. I will keep you updated on the build status in GitHub Actions and Docker Hub.')
-// })
-
-// export const sendNotification = (message: string): void => {
-//   bot.api.sendMessage(BOT_CHAT_ID, message)
-// }
-
-// bot.start()
+// Запуск бота
+startBot()

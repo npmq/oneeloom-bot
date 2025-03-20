@@ -1,10 +1,17 @@
 export interface GithubWebhookPayload {
-  status: 'success' | 'failure',
   repository: string
-  branch: string
-  timestamp: string,
   workflow: string
   commit_url: string
-  message: string
+  timestamp?: string,
   failed_step?: string
+  message?: string
+  branch?: string
+  status: 'success' | 'failure',
+  
+ 
+  
+  
+  
+  
+  
 }
