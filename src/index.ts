@@ -1,12 +1,12 @@
 import express from 'express'
 import { envConfig } from './config'
-import githubRouter from './routes/githubWebhook'
+import github from './routes/github.routes'
 
 const app = express()
 
 app.use(express.json())
 
-app.use('/webhook', githubRouter)
+app.use('/webhook', github)
 
 app.get('/', (req, res) => {
   res.send('Bot is up and running 🚀')
